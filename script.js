@@ -1,32 +1,26 @@
 function convertToRoman(num) {
-  const obj = {
-    0: ['M', 1000],
-    1: ['D', 500],
-    2: ['C', 100],
-    3: ['L', 50],
-    4: ['X', 10],
-    5: ['V', 5],
-    6: ['I', 1]
-  };
+  const romanNumerals = [
+    { numeral: 'M', value: 1000 },
+    { numeral: 'CM', value: 900 },
+    { numeral: 'D', value: 500 },
+    { numeral: 'CD', value: 400 },
+    { numeral: 'C', value: 100 },
+    { numeral: 'XC', value: 90 },
+    { numeral: 'L', value: 50 },
+    { numeral: 'XL', value: 40 },
+    { numeral: 'X', value: 10 },
+    { numeral: 'IX', value: 9 },
+    { numeral: 'V', value: 5 },
+    { numeral: 'IV', value: 4 },
+    { numeral: 'I', value: 1 },
+  ];
 
   let result = '';
 
-  for (let key = 0; key <= 6; key++) {
-    const [symbol, value] = obj[key];
+  for (const { numeral, value } of romanNumerals) {
     while (num >= value) {
-      result += symbol;
+      result += numeral;
       num -= value;
-    }
-
-    // Check for subtractive notation
-    if (key % 2 === 0 && key < 6) {
-      const nextKey = key + 2;
-      const [nextSymbol, nextValue] = obj[nextKey];
-
-      if (num >= value - nextValue) {
-        result += nextSymbol + symbol;
-        num -= value - nextValue;
-      }
     }
   }
 
